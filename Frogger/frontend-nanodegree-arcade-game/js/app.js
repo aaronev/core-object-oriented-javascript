@@ -1,50 +1,113 @@
-// Enemies our player must avoid
+//attempted, but couldn't finish
+//not sure if any of this is right
+//I'm still trying to understand OOPS
+//Got confused between JS and CSS animation 
+//Check out this website to see how far I got:
+//https://preview.c9users.io/ay3ism3/projects/Games/games.html
+
+var Board = function() { 
+//created board to help visualize
+    this.rows = [1, 2, 3, 4, 5, 6]
+//maybe assign each image a row and column in html
+    this.column = [1, 2, 3, 4, 5]
+}
+
 var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.rock = 'image/Rock.png'
     this.sprite = 'images/enemy-bug.png';
-};
+    this.row = Math.floor(Math.random() * (3 - 6)) + 3
+    this.column = Math.floor(Math.random() * (1 - 6)) + 1
+}
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-};
+    this.row += (this.speed) * dt;
+    Enemy.forEach(function(enemy, index) {
+        if(overlap(enemy, player)) {
+            updateScore("died");
+            player.column = 380;
+        }
+    })
+}
 
-// Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+    ctx.drawImage(Resources.get(this.sprite), this.row, this.column);
+}
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+Enemy.generateEnemies = function() {
+    allEnemies.push(new Enemy());
+    Enemy.removeOffScreenEnemies();
+    var delay;
+    if(score >= 200) {
+        delay = Helper.returnRandomValue([0, 200, 500, 750]);
+    } else {
+        delay = Helper.returnRandomValue([0, 500, 750, 1000]);
+    }
+    setTimeout(Enemy.generateEnemies, delay);
+}
 
+Enemy.removeOffScreenEnemies = function() {
+    allEnemies.forEach(function(enemy, index) {
+        if(enemy.x > 505) {
+            allEnemies.splice(index, 1);
+        }
+    })
+}
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+Enemy.generateEnemies();
 
+var Player = function(image) {
+    this.playerIcon = image
+    this.row = 1
+    this.column = Math.floor(Math.random() * 5) + 1
+    this.width = 171;
+    this.height = 101;
+}
 
+let player1 = new Player('images/char-boy.png')
+let player2 = new Player('images/char-cat-girl.png')
+let player3 = new Player('images/char-horn-girl.png')
+let player4 = new Player('images/char-pink-girl.png')
+let player5 = new Player('images/char-princess-girl.png')
+let players = [player1, player2, player3, player4, player5]
 
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.playerIcon), this.x, this.y);
+}
+
+Player.prototype.handleInput = function(keyCode) {
+    if(keyCode === 'left') {
+        if(this.row - 101 < 0) {
+            this.row = 0;
+        } else {
+        this.row -= 100;
+        }
+    } else if(keyCode == 'up') {
+        if(this.column - 85 < 0) {
+            Helper.updateScore("water");
+            this.column = 380;
+        } else {
+            this.column -= 85;
+        }
+    }else if(keyCode == 'right') {
+        if(this.row + 101 > 400) {
+            this.row = 400;
+        } else {
+            this.row = 400;
+        }
+    }else if(keyCode == 'down') {
+        if(this.column + 85 > 380) {
+            this.column = 300;
+        }else {
+            this.column += 85
+        }
+    }
+}
+
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
         39: 'right',
-        40: 'down'
+        40: 'down',
     };
-
     player.handleInput(allowedKeys[e.keyCode]);
-});
-
-
-
+})

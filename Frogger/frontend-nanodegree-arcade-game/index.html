@@ -6,6 +6,66 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div id='froggerGame'>
+        <h1>Frogger Game</h1> 
+        <h2>Pick a player<h2>
+        <h2>Then use the arrow keys to get to the other side...It's just that simple.</h2>
+        <div id='froggerGameBoard'>
+    	<div id='water'>
+    		<img class='spaces' src='images/water-block.png'>
+    		<img class='spaces' src='images/water-block.png'>
+    		<img class='spaces' src='images/water-block.png'>
+    		<img class='spaces' src='images/water-block.png'>
+    		<img class='spaces' src='images/water-block.png'>
+    	</div>
+    	<div id='stonePath3'>
+            <div class='animate'><img src='images/enemy-bug.png'></div>
+    		<img class='spaces' src='images/stone-block.png'>
+	    	<img class='spaces' src='images/stone-block.png'>
+	    	<img class='spaces' src='images/stone-block.png'>
+	    	<img class='spaces' src='images/stone-block.png'>
+	    	<img class='spaces' src='images/stone-block.png'>
+		</div>
+		<div id='stonePath2'>
+            <div class='animate'><img src='images/enemy-bug.png'></div>
+		    <img class='spaces' src='images/stone-block.png'>
+		    <img class='spaces' src='images/stone-block.png'>
+		    <img class='spaces' src='images/stone-block.png'>
+		    <img class='spaces' src='images/stone-block.png'>
+		    <img class='spaces' src='images/stone-block.png'>
+		</div>
+		<div id='stonePath'>
+            <div class='animate'><img src='images/enemy-bug.png'></div>
+		    <img class='spaces' src='images/stone-block.png'>
+		    <img class='spaces' src='images/stone-block.png'>
+		    <img class='spaces' src='images/stone-block.png'>
+		    <img class='spaces' src='images/stone-block.png'>
+		    <img class='spaces' src='images/stone-block.png'>
+	    </div>
+	    <div id='grassPath2'>
+	    	<img class='spaces' src='images/grass-block.png'>
+	    	<img class='spaces' src='images/grass-block.png'>
+	    	<img class='spaces' src='images/grass-block.png'>
+	    	<img class='spaces' src='images/grass-block.png'>
+	    	<img class='spaces' src='images/grass-block.png'>
+	    </div>
+	    <div id='grassPath'>
+	    	<img class='spaces' src='images/grass-block.png'>
+	    	<img class='spaces' src='images/grass-block.png'>
+	    	<img class='spaces' src='images/grass-block.png'>
+	    	<img class='spaces' src='images/grass-block.png'>
+	    	<img class='spaces' src='images/grass-block.png'>
+	    </div>
+	    <div id='characters'>
+	    	<input type='image' src='images/char-boy.png' name='saveForm' class='frogs' id='player1' onclick='gameStarts()'/>
+	    	<input type='image' src='images/char-cat-girl.png' name='saveForm' class='frogs' id='player2' onclick='inProgress()'/>
+	    	<input type='image' src='images/char-horn-girl.png' name='saveForm'class='frogs' id='player3' onclick='inProgress()'/>
+	    	<input type='image' src='images/char-pink-girl.png' name='saveForm' class='frogs' id='player4' onclick='inProgress()'/>
+	    	<input type='image' src='images/char-princess-girl.png' name='saveForm' class='frogs' id='player5' onclick='inProgress()'/>
+	    </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>
     <script src="js/engine.js"></script>
